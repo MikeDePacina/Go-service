@@ -1,23 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
    
-func helloMuxHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello gorilla/mux!\n"))
+func helloHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w,"Hello World")
 }
 
 func main() {
-	r := mux.NewRouter()
+	
 
 	// Step 2: Register the route with the handler function
-	r.HandleFunc("/", helloMuxHandler)
+	http.HandleFunc("/", helloHandler)
 
 	// Step 3: Start the HTTP server
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
    
